@@ -1,0 +1,14 @@
+{
+  "name": "Fullscreen Please",
+  "description": "Enables full screen button on all embedded youtube videos.",
+  "version": "0.1",
+  "permissions": [
+  ],
+  "content_scripts": [
+{
+  "matches": ["http://*/*","https://*/*"],
+  "js": ["background.js"]
+}
+],
+  "manifest_version": 2
+}
