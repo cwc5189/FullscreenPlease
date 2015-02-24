@@ -58,7 +58,7 @@ function enableFullScreenTwitter(){
 	
 	iframes = document.getElementsByTagName("iframe");
 	
-	console.log("enableFullScreenTwitter: Find twitter player cards");
+	//console.log("enableFullScreenTwitter: Find twitter player cards");
 	for(i = 0; i < iframes.length; i++){
 		if(iframes[i].src.indexOf("cardname=player") >= 0){
 			video = iframes[i];
@@ -67,24 +67,24 @@ function enableFullScreenTwitter(){
 			//Get the tweet container's first link, twitter only looks at the first one for media
 			tweetLinks = iframes[i].parentNode.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("twitter-timeline-link");
 			
-			console.log(tweetLinks);
+			//console.log(tweetLinks);
+
+			for(i = 0; i < tweetLinks.length; i++){
+				mediaLink = tweetLinks[i];
 			
-			if(tweetLinks){
-				mediaLink = tweetLinks[0];
-			}
-			
-			// If the media link is youtube, do the thing!
-			if(mediaLink.attributes["data-expanded-url"].value.replace("youtu.be", "youtube.com").replace("youtube.com", "youtube.com/embed/").indexOf("youtube.com") >= 0)
-			{
-				
-				// Get our video url and make some small adjustments, making it https and making sure the url is youtube.com
-				videoUrl = mediaLink.attributes["data-expanded-url"].value.replace("youtu.be", "youtube.com").replace("youtube.com", "youtube.com/embed/").replace("http://", "https://");
-				
-				// Then add our full screen, autoplay, and autohide to it.
-				video.src = videoUrl + "?fs=1&autoplay=1&autohide=1";
-				
-				// Have to wait because it wouldn't set the height until it was finished changing src
-				setTimeout(function(){video.height = 315;}, 100);
+				// If the media link is youtube, do the thing!
+				if(mediaLink.attributes["data-expanded-url"].value.replace("youtu.be", "youtube.com").replace("youtube.com", "youtube.com/embed/").indexOf("youtube.com") >= 0)
+				{
+					
+					// Get our video url and make some small adjustments, making it https and making sure the url is youtube.com
+					videoUrl = mediaLink.attributes["data-expanded-url"].value.replace("youtu.be", "youtube.com").replace("youtube.com", "youtube.com/embed/").replace("http://", "https://");
+					
+					// Then add our full screen, autoplay, and autohide to it.
+					video.src = videoUrl + "?fs=1&autoplay=1&autohide=1";
+					
+					// Have to wait because it wouldn't set the height until it was finished changing src
+					setTimeout(function(){video.height = 315;}, 200);
+				}
 			}
 		}
 	}
@@ -95,7 +95,7 @@ function enableFullScreenTwitterListener(){
 	
 	iframes = document.getElementsByTagName("iframe");
 	
-	console.log("Find twitter player cards");
+	//.log("Find twitter player cards");
 	for(i = 0; i < iframes.length; i++){
 		if(iframes[i].src.indexOf("cardname=player") >= 0){
 			//console.log("Found twitter player card");				
@@ -103,7 +103,7 @@ function enableFullScreenTwitterListener(){
 			//Get uncle/aunt preview container that contains the preview image/play button
 			previewContainer = iframes[i].parentNode.parentNode.getElementsByClassName("media-preview-container")[0];
 			
-			console.log(previewContainer);
+			//console.log(previewContainer);
 			
 			//Hide the preview image
 			previewContainer.style.display = "none";
